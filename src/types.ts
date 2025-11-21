@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-// --- OS Types ---
+// --- OS Window System Types ---
 export interface WindowState {
   id: string;
   title: string;
@@ -14,6 +14,7 @@ export interface WindowState {
   defaultHeight?: number;
 }
 
+// --- App Data Types (OS) ---
 export interface Note {
   id: string;
   title: string;
@@ -38,14 +39,17 @@ export interface MusicTrack {
     addedAt: number;
 }
 
+export interface SettingsState {
+    wallpaper: string;
+    theme: 'neon' | 'dark' | 'light';
+}
+
+// --- Global App Data (OS) ---
 export interface AppData {
   notes: Note[];
   events: CountdownEvent[];
   music: MusicTrack[];
-  settings: {
-      wallpaper: string;
-      theme: 'light' | 'dark';
-  };
+  settings: SettingsState;
 }
 
 export interface AppProps {
@@ -53,9 +57,7 @@ export interface AppProps {
   onUpdate: (newData: Partial<AppData>) => void;
 }
 
-// --- CMS / Website Types ---
-
-export type ThemeMode = 'cyberpunk' | 'acid' | 'vaporwave' | 'light' | 'dark';
+// --- Site Data Types (Admin Panel & Website Components) ---
 
 export interface Track {
   id: string;
@@ -63,8 +65,8 @@ export interface Track {
   artist: string;
   album: string;
   duration: string;
-  plays: number;
   coverUrl: string;
+  plays: number;
   audioUrl?: string;
   lyrics?: string;
   neteaseId?: string;
@@ -77,7 +79,7 @@ export interface Article {
   date: string;
   excerpt: string;
   coverUrl: string;
-  linkedTrackId?: string;
+  linkedTrackId?: string; 
 }
 
 export interface Artist {
@@ -85,7 +87,7 @@ export interface Artist {
   name: string;
   role: string;
   avatarUrl: string;
-  status: 'active' | 'guest';
+  status: 'active' | 'guest' | string;
 }
 
 export interface HeroData {
@@ -105,30 +107,28 @@ export interface FeaturedAlbum {
 }
 
 export interface Resource {
-  id: string;
-  title: string;
-  description?: string;
-  type: string;
-  provider: 'aliyun' | 'baidu' | 'quark' | 'google' | 'other';
-  link: string;
-  accessCode?: string;
-  size?: string;
-  date: string;
+    id: string;
+    title: string;
+    description?: string;
+    type: string;
+    provider: 'aliyun' | 'baidu' | 'quark' | 'google' | 'other';
+    link: string;
+    accessCode?: string;
+    size?: string;
+    date: string;
 }
 
 export interface CloudConfig {
   enabled: boolean;
-  provider?: 'r2' | 's3';
-  publicDomain?: string;
-  accessKeyId?: string;
-  secretAccessKey?: string;
-  bucketName?: string;
-  endpoint?: string;
-  // Legacy fields (optional)
-  accessKey?: string;
-  secretKey?: string;
-  bucket?: string;
+  provider: 'r2' | 's3';
+  publicDomain: string;
+  accessKeyId: string;
+  secretAccessKey: string;
+  bucketName: string;
+  endpoint: string;
 }
+
+export type ThemeMode = 'cyberpunk' | 'acid' | 'vaporwave';
 
 export interface ContactConfig {
   email: string;
@@ -136,18 +136,6 @@ export interface ContactConfig {
   addressLine1: string;
   addressLine2: string;
   footerText: string;
-}
-
-export interface NavItem {
-  id: string;
-  label: string;
-  targetId: string;
-}
-
-export interface CloudIntegrations {
-  aliDrive?: CloudConfig;
-  oneDrive?: CloudConfig;
-  cloudflare?: CloudConfig;
 }
 
 export interface SiteData {
@@ -159,7 +147,13 @@ export interface SiteData {
   resources: Resource[];
   storage: CloudConfig;
   contact: ContactConfig;
-  theme: ThemeMode;
-  navigation?: NavItem[];
-  integrations?: CloudIntegrations;
+  theme?: ThemeMode;
+  navigation?: any[]; 
+  integrations?: any;
+}
+
+export interface NavItem {
+  id: string;
+  label: string;
+  targetId: string;
 }
