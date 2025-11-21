@@ -57,8 +57,7 @@ export interface AppProps {
   onUpdate: (newData: Partial<AppData>) => void;
 }
 
-// --- Site Data Types (Admin Panel & Website Components) ---
-
+// --- Types for Admin Panel Compatibility ---
 export interface Track {
   id: string;
   title: string;
@@ -150,10 +149,4 @@ export interface SiteData {
   theme?: ThemeMode;
   navigation?: any[]; 
   integrations?: any;
-}
-
-export interface NavItem {
-  id: string;
-  label: string;
-  targetId: string;
 }
